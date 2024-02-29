@@ -8,7 +8,7 @@ R.É um conjunto de instruções que são executadas automaticamente quando um c
 ## 3. Sobre o utilitário **make** e o arquivo **Makefile responda**:
 
 #### (a) Explique com suas palavras o que é e para que serve o **Makefile**.
-
+R.O Makefile é basicamente um arquivo de texto que define as instruções para construir um programa ou software,em que ele serve como um guia para o utilitário make 
 #### (b) Descreva brevemente o processo realizado pelo utilitário **make** para compilar um programa.
 
 #### (c) Qual é a sintaxe utilizada para criar um novo **target**?
