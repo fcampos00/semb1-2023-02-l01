@@ -2,9 +2,9 @@
 # Felipe 11921ETE007
 
 ## 1. Explique brevemente o que é compilação cruzada (***cross-compiling***) e para que ela serve.
-
+R.A compilação cruzada é o processo de compilar um programa em um ambiente de desenvolvimento diferente do ambiente do qual ele será executado.Isso geralmente é feito quando o código-fonte é desenvolvido em uma plataforma,como um computador pessoal,mas o programa final precisa ser executado em uma plataforma diferente,como no caso um sistema embarcado.Sua importância se dá pelo fato de permitir que desenvolvedores criem softwares para uma ampla variedade de plataformas,maximizando a eficiência e a portabilidade do código.
 ## 2. O que é um código de inicialização ou ***startup*** e qual sua finalidade?
-
+R.É um conjunto de instruções que são executadas automaticamente quando um computador ou dispositivo é ligado,em que ele é responsável por carregar o sistema operacional e outros programas essenciais para o funcionamento do sistema.Sua finalidade é garantir que o sistema operacional seja carregado corretamente e que todos os programas necessários estejam disponíveis para uso,além de também ser usado para configurar o sistema operacional e personalizar o ambiente de trabalho.Porém,além desses benefícios que um código de inicialização possui,ele pode ter algumas desvantagens,tais como deixar o processo de inicialização mais lento,possibilidade de causar problemas de compatibilidade e difícil configuração,portanto deve-se verificar a compatibilidade dos programas e fazer um backup do código de inicialização sempre que for utilizá-lo.
 ## 3. Sobre o utilitário **make** e o arquivo **Makefile responda**:
 
 #### (a) Explique com suas palavras o que é e para que serve o **Makefile**.
