@@ -39,3 +39,50 @@ void defaultHandler(void) {
     while (1) {}
 }
 ## 2. Siga o roteiro disponibilizado no [laboratório 02](https://github.com/daniel-p-carvalho/ufu-semb1-lab-02.git) e implemente no arquivo **stm32f411-blackpill/Makefile** um script para automatizar o processo de compilação. Este script deverá ser capaz de gerar os arquivos objetos realocáveis e gerenciar automaticamente as dependências dos arquivos fonte do projeto.
+R.# Ferramentas do toolchain:
+CC = arm-none-eabi-gcc
+RM = rm -rf
+
+# Diretórios arquivos objeto e de lista de dependências serão salvos:
+OBJDIR = build
+DEPDIR = .deps
+
+# Arquivos a serem compilados:
+SRCS = src/startup.c src/main.c
+
+# Flags do compilador:
+CFLAGS = -g -mcpu=cortex-m4 -mthumb -Wall -O0 -I./inc
+DEPFLAGS = -MMD -MP -MF $(DEPDIR)/$*.d
+
+# Gera lista de arquivos objeto e cria diretório onde serão salvos:
+OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRCS))
+
+# Gera lista de arquivos de lista dependência e cria diretório onde serão salvos:
+DEPS = $(patsubst src/%.c,$(DEPDIR)/%.d,$(SRCS))
+
+# Diretivas especiais para que não dê erro caso o diretório já exista:
+$(shell mkdir -p $(OBJDIR) > /dev/null)
+$(shell mkdir -p $(DEPDIR) > /dev/null)
+
+# Target principal:
+all: $(TARGET).elf
+
+# Compilação dos objetos:
+$(OBJDIR)/%.o: src/%.c
+    $(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
+
+# Inclui arquivos de dependência:
+-include $(DEPS)
+
+# Cria um novo target para cada arquivo de dependência possível:
+$(DEPS):
+
+# Linkagem:
+$(TARGET).elf: $(OBJS)
+    $(CC) $(LDFLAGS) $^ -o $@
+
+.PHONY: clean
+clean:
+    $(RM) $(OBJDIR) $(DEPDIR)
+
+OBS:Neste script, OBJDIR e DEPDIR especificam os diretórios onde os arquivos objeto e as dependências serão salvos, respectivamente. SRCS contém os arquivos fonte que serão compilados. CFLAGS contém as flags de compilação. DEPFLAGS são as flags para gerar as dependências. OBJS e DEPS são as listas de arquivos objetos e dependências, respectivamente. A regra all é o alvo padrão, responsável por gerar o executável. A regra para compilar os objetos é similar à que você já tinha, mas atualizada para usar o diretório OBJDIR. DEPS é incluído para garantir que as dependências sejam geradas e incluídas corretamente. O alvo clean é utilizado para limpar os diretórios de objetos e dependências.
