@@ -8,11 +8,13 @@ R.É um conjunto de instruções que são executadas automaticamente quando um c
 ## 3. Sobre o utilitário **make** e o arquivo **Makefile responda**:
 
 #### (a) Explique com suas palavras o que é e para que serve o **Makefile**.
-R.O Makefile é basicamente um arquivo de texto que define as instruções para construir um programa ou software,em que ele serve como um guia para o utilitário make 
+R.O Makefile é basicamente um arquivo de texto que define as instruções para construir um programa ou software,em que ele serve como um guia para o utilitário make,que automatiza o processo de compilação,linkedição e outras tarefas necessárias para gerar o programa final.Ele torna o processo de desenvolvimento mais eficiente e organizado,pois centraliza todas as informações necessárias para construir o programa em um único lugar,o que em um trabalho em equipe gerará mais facilidade,já que todos poderão construir o programa. 
 #### (b) Descreva brevemente o processo realizado pelo utilitário **make** para compilar um programa.
-
+R.O utilitário make lê o Makefile e segue as instruções nele contidas para construir o programa,e o processo consiste nas etapas de análise do Makefile(o make lê o Makefile e identifica os targets[alvos] e suas dependências),verificação de dependências(o make verifica se os arquivos que compõem o target foram modificados desde a última compilação),execução de regras(caso os arquivos foram modificados,o make executa as regras associadas ao target) e atualização de timestamps(o make atualiza os timestamps dos arquivos que foram modificados).
 #### (c) Qual é a sintaxe utilizada para criar um novo **target**?
-
+R.A sintaxe para criar um novo target no Makefile é: target: dependências
+                                                         regras
+Onde o target representa o nome do target,dependências representa uma lista de arquivos que o target depende e regras representa uma lista de comandos que serão executados para construir o target.
 #### (d) Como são definidas as dependências de um **target**, para que elas são utilizadas?
 
 #### (e) O que são as regras do **Makefile**, qual a diferença entre regras implícitas e explícitas?
