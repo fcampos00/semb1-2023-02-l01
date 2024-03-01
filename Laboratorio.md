@@ -39,45 +39,45 @@ void defaultHandler(void) {
     while (1) {}
 }
 ## 2. Siga o roteiro disponibilizado no [laboratório 02](https://github.com/daniel-p-carvalho/ufu-semb1-lab-02.git) e implemente no arquivo **stm32f411-blackpill/Makefile** um script para automatizar o processo de compilação. Este script deverá ser capaz de gerar os arquivos objetos realocáveis e gerenciar automaticamente as dependências dos arquivos fonte do projeto.
-R.# Ferramentas do toolchain:
+R.// Ferramentas do toolchain:
 CC = arm-none-eabi-gcc
 RM = rm -rf
 
-# Diretórios arquivos objeto e de lista de dependências serão salvos:
+// Diretórios arquivos objeto e de lista de dependências serão salvos:
 OBJDIR = build
 DEPDIR = .deps
 
-# Arquivos a serem compilados:
+// Arquivos a serem compilados:
 SRCS = src/startup.c src/main.c
 
-# Flags do compilador:
+// Flags do compilador:
 CFLAGS = -g -mcpu=cortex-m4 -mthumb -Wall -O0 -I./inc
 DEPFLAGS = -MMD -MP -MF $(DEPDIR)/$*.d
 
-# Gera lista de arquivos objeto e cria diretório onde serão salvos:
+// Gera lista de arquivos objeto e cria diretório onde serão salvos:
 OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRCS))
 
-# Gera lista de arquivos de lista dependência e cria diretório onde serão salvos:
+// Gera lista de arquivos de lista dependência e cria diretório onde serão salvos:
 DEPS = $(patsubst src/%.c,$(DEPDIR)/%.d,$(SRCS))
 
-# Diretivas especiais para que não dê erro caso o diretório já exista:
+// Diretivas especiais para que não dê erro caso o diretório já exista:
 $(shell mkdir -p $(OBJDIR) > /dev/null)
 $(shell mkdir -p $(DEPDIR) > /dev/null)
 
-# Target principal:
+// Target principal:
 all: $(TARGET).elf
 
-# Compilação dos objetos:
+// Compilação dos objetos:
 $(OBJDIR)/%.o: src/%.c
     $(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
-# Inclui arquivos de dependência:
+// Inclui arquivos de dependência:
 -include $(DEPS)
 
-# Cria um novo target para cada arquivo de dependência possível:
+// Cria um novo target para cada arquivo de dependência possível:
 $(DEPS):
 
-# Linkagem:
+// Linkagem:
 $(TARGET).elf: $(OBJS)
     $(CC) $(LDFLAGS) $^ -o $@
 
