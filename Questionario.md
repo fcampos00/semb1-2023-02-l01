@@ -32,17 +32,17 @@ R.Os processadores ARM tratam exceções e interrupções de maneira similar.As 
 ### (e) Qual a diferença entre os registradores **CPSR** (***Current Program Status Register***) e **SPSR** (***Saved Program Status Register***)?
 R.O CPSR é um registrador que contém informações sobre o estado atual da execução do programa,como o estado das condições aritméticas e lógicas,o modo de operação atual e as configurações de controle.Já o SPSR é usado para armazenar temporariamente o valor do CPSR durante o tratamento das exceções,para que ele possa ser restaurado posteriormente.
 ### (f) Qual a finalidade do **LR** (***Link Register***)?
-
+R.O Link Register é um registrador usado para armazenar o endereço de retorno de uma chamada de sub-rotina(função).Quando uma sub-rotina é chamada,o endereço de retorno é armazenado no LR,e isso permite que a execução retorne ao ponto de chamada após a conclusão da sub-rotina.
 ### (g) Qual o propósito do Program Status Register (PSR) nos processadores ARM?
-
+R.O PSR nos processadores ARM é utilizado para armazenar informações sobre o estado atual da execução do programa,incluindo condições de resultado,modo de operação,habilitação de interrupções e outras configurações de controle.
 ### (h) O que é a tabela de vetores de interrupção?
-
+R.A tabela de vetores de interrupção é uma estrutura de dados que mapeia os vetores de interrupção para os endereços das rotinas de tratamento de interrupção no sistema.Quando uma interrupção ocorre,o processador consulta a tabela de vetores de interrupção para encontrar o endereço da rotina de tratamento correspondente e inicia a execução dessa rotina.
 ### (i) Qual a finalidade do NVIC (**Nested Vectored Interrupt Controller**) nos microcontroladores ARM e como ele pode ser utilizado em aplicações de tempo real?
-
+R.O NVIC é um controlador de interrupção avançado encontrado nos microcontroladores ARM Cortex-M,em que ele é responsável por gerenciar todas as interrupções no sistema,incluindo atribuição de prioridades,mascaramento de interrupções e controle de estado.O NVIC também permite um tratamento real,garantindo que as interrupções mais importantes sejam atendidas primeiro.
 ### (j) Em modo de execução normal, o Cortex-M pode fazer uma chamada de função usando a instrução **BL**, que muda o **PC** para o endereço de destino e salva o ponto de execução atual no registador **LR**. Ao final da função, é possível recuperar esse contexto usando uma instrução **BX LR**, por exemplo, que atualiza o **PC** para o ponto anterior. No entanto, quando acontece uma interrupção, o **LR** é preenchido com um valor completamente  diferente,  chamado  de  **EXC_RETURN**.  Explique  o  funcionamento  desse  mecanismo  e especifique como o **Cortex-M** consegue fazer o retorno da interrupção. 
-
+R.Quando uma interrupção ocorre,o endereço de retorno atual é automaticamente armazenado no registrador LR pelo hardware do Cortex-M.Isso permite que,após a conclusão do tratamento da interrupção,a execução retorne ao ponto exato de onde foi interrompida,usando uma instrução especial(BXLR).O valor armazenado no LR durante uma interrupção não é o endereço de retorno normal,mas um valor especial chamado EXC_RETURN,que indica ao processador que a interrupção está sendo tratada e como retornar ao modo de execução anterior de maneira adequada.
 ### (k) Qual  a  diferença  no  salvamento  de  contexto,  durante  a  chegada  de  uma  interrupção,  entre  os processadores Cortex-M3 e Cortex M4F (com ponto flutuante)? Descreva em termos de tempo e também de uso da pilha. Explique também o que é ***lazy stack*** e como ele é configurado. 
-
+R.A dierença fundamental no salvamento de contexto durante a chegada de uma interrupção entre os processadores Cortex-M3 e Cortex-M4F está no tratamento dos registradores de ponto flutuante(se presentes).O Cortex-M3 não possui registradores de ponto flutuante,então o salvamento de contexto durante uma interrupção é mais simples e geralmente mais rápido,pois não envolve salvar e restaurar esses registradores.Por outro lado,o Cortex--M4F possui registradores de ponto flutuante,o que aumenta o tempo necessário para salvar e restaurar o contexto durante uma interrupção.O 'lazy stack' é uma técnica usada para alcoar espaço na pilha apenas quando necessário,o que pode reduzir o tempo de resposta às interrupções,na medida em que esse recurso pode ser configurado no Cortex-M4F para otimizar o desempenho em aplicações de tempo real.
 
 ## Referências
 
