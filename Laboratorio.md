@@ -48,36 +48,46 @@ OBJDIR = build
 DEPDIR = .deps
 
 // Arquivos a serem compilados:
+
 SRCS = src/startup.c src/main.c
 
 // Flags do compilador:
+
 CFLAGS = -g -mcpu=cortex-m4 -mthumb -Wall -O0 -I./inc
 DEPFLAGS = -MMD -MP -MF $(DEPDIR)/$*.d
 
 // Gera lista de arquivos objeto e cria diretório onde serão salvos:
+
 OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRCS))
 
 // Gera lista de arquivos de lista dependência e cria diretório onde serão salvos:
+
 DEPS = $(patsubst src/%.c,$(DEPDIR)/%.d,$(SRCS))
 
 // Diretivas especiais para que não dê erro caso o diretório já exista:
+
 $(shell mkdir -p $(OBJDIR) > /dev/null)
 $(shell mkdir -p $(DEPDIR) > /dev/null)
 
 // Target principal:
+
 all: $(TARGET).elf
 
 // Compilação dos objetos:
+
 $(OBJDIR)/%.o: src/%.c
     $(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 // Inclui arquivos de dependência:
+
 -include $(DEPS)
 
 // Cria um novo target para cada arquivo de dependência possível:
+
 $(DEPS):
 
 // Linkagem:
+
 $(TARGET).elf: $(OBJS)
     $(CC) $(LDFLAGS) $^ -o $@
 
