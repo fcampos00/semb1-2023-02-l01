@@ -16,13 +16,13 @@ R.A sintaxe para criar um novo target no Makefile é: target: dependências
                                                          regras
 Onde o target representa o nome do target,dependências representa uma lista de arquivos que o target depende e regras representa uma lista de comandos que serão executados para construir o target.
 #### (d) Como são definidas as dependências de um **target**, para que elas são utilizadas?
-
+R.As dependências de um target são definidas no Makefile após o nome do target,separadas por dois pontos(:).As dependências podem ser arquivos ou outros targets,e são utilizadas pelo make para determinar quais arquivos precisam ser recompilados quando um arquivo é modificado.Se um arquivo depende de outro arquivo que foi modificado,o make recompilará o arquivo dependente.
 #### (e) O que são as regras do **Makefile**, qual a diferença entre regras implícitas e explícitas?
-
+R.As regras do Makefile são as instruções que o make segue para construir um target,e elas podem ser subdivididas em explícitas(definidas explicitamente no Makefile pelo desenvolvedor,em que definem quais comandos serão executados para construir o target) e implícitas(predefinidas pelo make para alguns tipos de arquivos,em que definem automaticamente os comandos para compilar e linkar de acordo com o tipo de arquivo).
 ## 4. Sobre a arquitetura **ARM Cortex-M** responda:
 
 ### (a) Explique o conjunto de instruções ***Thumb*** e suas principais vantagens na arquitetura ARM. Como o conjunto de instruções ***Thumb*** opera em conjunto com o conjunto de instruções ARM?
-
+R.O conjunto de instruções Thumb é um conjunto de instruções de 16 bits para a arquitetura ARM,e oferece várias vantagens como o tamanho reduzido(instruções Thumb são menores que as isntruções ARM de 32 bits,o que reduz o tamanho do código e a quantidade de memória necessária),eficiência energética(instruções Thumb geralmente consomem menos energia do que as instruções ARM de 32 bits,o que é importante para sistemas embarcados com bateria) e desempenho aprimorado(em alguns casos,instruções Thumb podem ser executadas mais rapidamente do que as instruções ARM de 32 bits).
 ### (b) Explique as diferenças entre as arquiteturas ***ARM Load/Store*** e ***Register/Register***.
 
 ### (c) Os processadores **ARM Cortex-M** oferecem diversos recursos que podem ser explorados por sistemas baseados em **RTOS** (***Real Time Operating Systems***). Por exemplo, a separação da execução do código em níveis de acesso e diferentes modos de operação. Explique detalhadamente como funciona os níveis de acesso de execução de código e os modos de operação nos processadores **ARM Cortex-M**.
